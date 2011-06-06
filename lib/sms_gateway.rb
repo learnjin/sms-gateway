@@ -1,0 +1,3 @@
+module SmsGateway
+  # Your code goes here...
+end
