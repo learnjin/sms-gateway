@@ -1,0 +1,18 @@
+---
+
+development:
+    user: username
+    password: secret
+    from: 493088888888
+    adapter: :sms_global
+
+test:
+    adapter: :test
+
+development:
+    user: username
+    password: secret
+    from: 493088888888
+    adapter: :sms_global
+
+
