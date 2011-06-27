@@ -31,7 +31,7 @@ To deliver SMS asynchronously this gem makes use of resque, a
 popular queing system basd on the key-value data store redis. You need
 to have a working resque and redis setup if you want to use
 the aynchronous feature. For more information on resque visit
-https://github.com/defunkt/resque.
+https://github.com/defunkt/resque .
 
 
 = Usage
@@ -64,9 +64,10 @@ resque documentation):
 
 So far the gem is pretty limited. Ideas for following version are:
 
-* unit tests
-* other sms gateway providers
+* more and better unit tests
+* more sms gateway apis
 * decoupling of resque
+
 
 = License
 

@@ -4,7 +4,8 @@ module SmsGateway
   class Sms < Struct.new(:from, :to, :text)
 
     def initialize(params)
-      self.from = params[:from]||SmsGateway::Base.config[:from]
+      #self.from = params[:from]||SmsGateway::Base.config[:from]
+      self.from = params[:from]||SmsGateway::Base.from
       self.to = params[:to]
       self.text = params[:text]
     end

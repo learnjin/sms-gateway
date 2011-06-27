@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.add_dependency('httparty')
   s.add_dependency('resque')
 
+  s.add_development_dependency('webmock')
+
 end
 
 

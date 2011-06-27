@@ -3,18 +3,28 @@ module SmsGateway
   class Base
 
     class << self
-      attr_accessor :connection
-      attr_reader :config
+      attr_accessor :from, :user, :password
+      attr_reader :adapter
+
+      def configure
+        yield(self)
+      end
+
+      def adapter=(underscore_name)
+         klassname = underscore_name.split("_").map(&:capitalize).join
+         klass = SmsGateway::Adapters.const_get(klassname)
+         @adapter = klass.new
+      end
 
       def config=(options)
         @config = options.symbolize_keys 
-        klassname = @config[:adapter].to_s.split("_").map(&:capitalize).join
-        klass = SmsGateway::Adapters.const_get(klassname)
-        self.connection = klass.new
+        @config.each do |k,v|
+          self.send "#{k}=", v
+        end
       end
 
       def deliver(options)
-        self.connection.send_sms(SmsGateway::Sms.new(options.symbolize_keys))
+        self.adapter.send_sms(SmsGateway::Sms.new(options.symbolize_keys))
       end
 
       def self.deliver_later(text, to, from=Base.config[:from]) 

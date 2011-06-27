@@ -6,8 +6,11 @@ module SmsGateway
       require 'httparty'
       include HTTParty
       base_uri 'http://www.smsglobal.com'
+
       def initialize(config={})
-        @config = SmsGateway::Base.config
+        @config = {:user => SmsGateway::Base.user, :password => SmsGateway::Base.password,
+          :from => SmsGateway::Base.from}
+        @config.merge!(config)
       end
 
       def send_sms(sms)
