@@ -3,7 +3,7 @@ module SmsGateway
   class Base
 
     class << self
-      attr_accessor :from, :user, :password
+      attr_accessor :from, :user, :password, :key, :route
       attr_reader :adapter
 
       def configure
@@ -16,11 +16,17 @@ module SmsGateway
          @adapter = klass.new
       end
 
+      def config
+        @config
+      end
+
       def config=(options)
         @config = options.symbolize_keys 
+        adapter = @config.delete(:adapter)
         @config.each do |k,v|
           self.send "#{k}=", v
         end
+        self.adapter = adapter 
       end
 
       def deliver(options)
