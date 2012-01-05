@@ -2,11 +2,11 @@
 
 The SMS Gateway gem provides a simple and extensible interface for
 various SMS Gateways. It is loosely oriented on Action Mailer. The
-gem allows you to create a SMS and deliver it synchronously or
-asynchronously. So far it only ships with the following adapters.
+gem allows you to create an SMS and deliver it synchronously or
+asynchronously. So far it ships with the following adapters:
 
 * smsglobal.com
-* a dummy adapter for testing purposes
+* smstrade.de
 
 
 = Installation
@@ -21,22 +21,22 @@ gem's generator:
 
     rails g sms_gateway:install
 
-The generator installs an initializer and a yml file which you will need
-to configure before sending a SMS.
+which installs an initializer and a yml file that you will need
+to configure before sending out an SMS.
 
 
 == Resque and Redis
 
-To deliver SMS asynchronously this gem makes use of resque, a
-popular queing system basd on the key-value data store redis. You need
-to have a working resque and redis setup if you want to use
-the aynchronous feature. For more information on resque visit
+To deliver SMS asynchronously this gem makes use of resque, a popular
+queing system basd on the key-value data store redis. You need
+to have a working resque and redis setup if you want to use the
+aynchronous sending feature. For more information on resque visit
 https://github.com/defunkt/resque .
 
 
 = Usage
 
-Similar to action mailer you create the message object first:
+Similar to action mailer you create a message object first:
 
     m = SmsGateway::Sms.new(:from => '493088888888, :to => '49309999999',
           :text => 'my sms must not be longer than 160 characters.')    
