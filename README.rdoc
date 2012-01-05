@@ -67,6 +67,7 @@ So far the gem is pretty limited. Ideas for following version are:
 * more and better unit tests
 * more sms gateway apis
 * decoupling of resque
+* error handling
 
 
 = License
