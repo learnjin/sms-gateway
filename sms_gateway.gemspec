@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email       = ["kai@doxter.de"]
   s.homepage    = ""
   s.summary     = %q{Simple and flexible interface to SMS Gateways}
-  s.description = %q{Provides an interface to SMS Gateways. So far it supports smsglobal.com.}
+  s.description = %q{Provides an interface to SMS Gateways. So far it supports smsglobal.com and smstrade.de}
 
   s.rubyforge_project = "sms_gateway"
 
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency('resque')
 
   s.add_development_dependency('webmock')
+  s.add_development_dependency('debugger')
 
 end
 
