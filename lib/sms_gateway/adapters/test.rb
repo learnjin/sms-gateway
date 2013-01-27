@@ -4,7 +4,7 @@ module SmsGateway
   class Base
 
     class << self
-      attr_reader :deliveries
+      attr_accessor :deliveries
     end
 
     @deliveries = []

@@ -17,6 +17,9 @@ class SmsGateway::Adapters::SmsGatewayTest < Test::Unit::TestCase
     assert_equal 0, SmsGateway::Base.deliveries.size
     sms.deliver
     assert_equal 1, SmsGateway::Base.deliveries.size
+
+    SmsGateway::Base.deliveries = []
+    assert_equal [], SmsGateway::Base.deliveries
     
   end
 
