@@ -18,11 +18,10 @@ module SmsGateway
       attr_accessor :deliveries
 
       def initialize(config={})
-        @logger = Logger.new(STDOUT)
+        #@logger = Logger.new(STDOUT)
       end
 
       def send_sms(sms)
-        #@logger.info "would be sending sms: #{sms.to_s}" 
         SmsGateway::Base.deliveries << sms
       end
 

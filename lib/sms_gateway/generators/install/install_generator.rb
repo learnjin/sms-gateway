@@ -1,3 +1,6 @@
+require 'rails'
+require 'rails/generators'
+
 module SmsGateway
 
   module Generators

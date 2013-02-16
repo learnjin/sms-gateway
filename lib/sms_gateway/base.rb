@@ -21,7 +21,7 @@ module SmsGateway
       end
 
       def config=(options)
-        @config = options.symbolize_keys 
+        @config = options
         adapter = @config.delete(:adapter)
         @config.each do |k,v|
           self.send "#{k}=", v
@@ -30,7 +30,7 @@ module SmsGateway
       end
 
       def deliver(options)
-        self.adapter.send_sms(SmsGateway::Sms.new(options.symbolize_keys))
+        self.adapter.send_sms(SmsGateway::Sms.new(options))
       end
 
       def self.deliver_later(text, to, from=Base.config[:from]) 
