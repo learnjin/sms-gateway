@@ -1,3 +1,4 @@
+# encoding: UTF-8
 
 require 'test_helper'
 
@@ -37,15 +38,16 @@ class SmsGateway::Adapters::SmsGatewayTest < Test::Unit::TestCase
       :from => 'SMSTRADE'
     }
 
-    stub_request(:get, "http://gateway.smstrade.de/?from=SMSTRADE&key=KEY&message=Hello%20World&route=direct&to=491701234567").
-        to_return(:status => 200, :body => "", :headers => {})
+    sms = Sms.new(:to => '491701234567', :text => "Hallö Ümläut.")
 
-    sms = Sms.new(:to => '491701234567', :text => "Hello World")
+    stub_request(:get, "http://gateway.smstrade.de/?charset=UTF-8&from=SMSTRADE&key=KEY&message=#{URI.encode(sms.text)}&route=direct&to=491701234567").
+        to_return(:status => 200, :body => "", :headers => {})
 
     sms.deliver
 
-    assert_requested(:get, "http://gateway.smstrade.de/?key=KEY&to=491701234567&message=Hello+World&route=direct&from=SMSTRADE")
+    assert_requested(:get, "http://gateway.smstrade.de/?key=KEY&to=491701234567&message=#{URI.encode(sms.text)}&route=direct&from=SMSTRADE&charset=UTF-8")
   end
+
 
 
 end
