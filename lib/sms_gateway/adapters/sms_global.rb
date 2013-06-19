@@ -14,7 +14,7 @@ module SmsGateway
       end
 
       def send_sms(sms)
-        options = @config.merge({:action => "sendsms", :to => sms.to, :text => sms.text})
+        options = @config.merge({:action => "sendsms", :from => sms.from, :to => sms.to, :text => sms.text})
         self.class.post('/http-api.php', :query => options)
       end
 

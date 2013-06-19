@@ -17,15 +17,18 @@ class SmsGateway::Adapters::SmsGatewayTest < Test::Unit::TestCase
       :adapter => 'sms_global'
     }
 
-    stub_request(:post, "http://www.smsglobal.com/http-api.php?action=sendsms&from=493011111111&password=secret&text=hello&to=493088888888&user=userid").
+    stub_request(:post, "http://www.smsglobal.com/http-api.php?action=sendsms&from=4930123456&password=secret&text=hello&to=493088888888&user=userid").
       to_return(:status => 200, :body => "OK: 0;", :headers => {})
 
-    sms = Sms.new(:to => '493088888888',
+    sms = Sms.new(:from => '4930123456', :to => '493088888888',
                   :text => "hello")
 
     sms.deliver
 
-    assert_requested(:post, "http://www.smsglobal.com/http-api.php?action=sendsms&from=493011111111&password=secret&text=hello&to=493088888888&user=userid")
+    assert_requested(:post, "http://www.smsglobal.com/http-api.php?action=sendsms&from=4930123456&password=secret&text=hello&to=493088888888&user=userid")
+
+
+
   end
 
 
@@ -38,14 +41,14 @@ class SmsGateway::Adapters::SmsGatewayTest < Test::Unit::TestCase
       :from => 'SMSTRADE'
     }
 
-    sms = Sms.new(:to => '491701234567', :text => "Hallö Ümläut.")
+    sms = Sms.new(:to => '491701234567', :text => "Hallö Ümläut.", :from => 'SENDER')
 
-    stub_request(:get, "http://gateway.smstrade.de/?charset=UTF-8&from=SMSTRADE&key=KEY&message=#{URI.encode(sms.text)}&route=direct&to=491701234567").
+    stub_request(:get, "http://gateway.smstrade.de/?charset=UTF-8&from=SENDER&key=KEY&message=#{URI.encode(sms.text)}&route=direct&to=491701234567").
         to_return(:status => 200, :body => "", :headers => {})
 
     sms.deliver
 
-    assert_requested(:get, "http://gateway.smstrade.de/?key=KEY&to=491701234567&message=#{URI.encode(sms.text)}&route=direct&from=SMSTRADE&charset=UTF-8")
+    assert_requested(:get, "http://gateway.smstrade.de/?key=KEY&to=491701234567&message=#{URI.encode(sms.text)}&route=direct&from=SENDER&charset=UTF-8")
   end
 
 
