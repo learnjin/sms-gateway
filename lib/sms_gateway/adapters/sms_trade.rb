@@ -14,6 +14,7 @@ module SmsGateway
 
       def send_sms(sms)
         options = @config.merge({:from => sms.from, :to => sms.to, :message => sms.text, :charset => "UTF-8"}) 
+        options.merge!({:route => sms.route}) if sms.route
         self.class.get('/', :query => options)
       end
 

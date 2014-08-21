@@ -1,9 +1,8 @@
-
 require 'test_helper'
 
-class SmsGateway::ConfigurationTest < Test::Unit::TestCase
+describe SmsGateway::Base do
 
-  def setup
+  before do
      SmsGateway::Base.configure do |config|
       config.from = '123456789'
       config.user = 'some_user'
@@ -24,23 +23,6 @@ class SmsGateway::ConfigurationTest < Test::Unit::TestCase
     sms = SmsGateway::Sms.new(:text => 'test')
     assert_equal '123456789', sms.from
   end
-
-#  def test_parse_adapter
-#    assert_equal SmsGateway::Adapters::Test, SmsGateway::Base.adapter
-#  end
-#
-#  def test_work_config_hash
-#    SmsGateway::Base.config = {
-#      :from => 'new_from',
-#      :user => 'new_user',
-#      :password => 'new_password', 
-#      :adapter => 'sms_global'}
-#    
-#    assert_equal 'new_from', SmsGateway::Base.from
-#    assert_equal 'new_user', SmsGateway::Base.user
-#    assert_equal 'new_password', SmsGateway::Base.password
-#    assert_equal SmsGateway::Adapters::SmsGlobal, SmsGateway::Base.adapter
-#  end
 
 end
 

@@ -29,8 +29,8 @@ module SmsGateway
         self.adapter = adapter 
       end
 
-      def deliver(options)
-        self.adapter.send_sms(SmsGateway::Sms.new(options))
+      def deliver(sms)
+        self.adapter.send_sms(sms)
       end
 
       def self.deliver_later(text, to, from=Base.config[:from]) 

@@ -1,21 +1,16 @@
-
 ## The SMS-Object
 module SmsGateway
-  class Sms < Struct.new(:from, :to, :text)
+  class Sms < Struct.new(:from, :to, :text, :route)
 
     def initialize(params)
-      #self.from = params[:from]||SmsGateway::Base.config[:from]
       self.from = params[:from]||SmsGateway::Base.from
       self.to = params[:to]
       self.text = params[:text]
+      self.route = params[:route]
     end
 
     def deliver
-      SmsGateway::Base.deliver(:to=>self.to, :from=>self.from, :text=>self.text)
-    end
-
-    def deliver_later
-      Resque.enqueue(SmsGateway::SmsJob, :to=>self.to, :from=>self.from, :text=>self.text)
+      SmsGateway::Base.deliver(self)
     end
 
     def to_s
