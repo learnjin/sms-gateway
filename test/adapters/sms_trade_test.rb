@@ -7,7 +7,8 @@ describe SmsGateway::Adapters::SmsGlobal do
       :adapter => 'sms_trade',
       :route => 'direct',
       :key => 'KEY',
-      :from => 'SMSTRADE'
+      :from => 'SMSTRADE',
+      :base_uri => 'http://gateway.smspromote.de'
     }
   end
 
@@ -15,24 +16,24 @@ describe SmsGateway::Adapters::SmsGlobal do
 
     sms = SmsGateway::Sms.new(:to => '491701234567', :text => "Hallö Ümläut.", :from => 'SENDER')
 
-    stub_request(:get, "http://gateway.smstrade.de/?charset=UTF-8&from=SENDER&key=KEY&message=#{URI.encode(sms.text)}&route=direct&to=491701234567").
+    stub_request(:get, "http://gateway.smspromote.de/?charset=UTF-8&from=SENDER&key=KEY&message=#{URI.encode(sms.text)}&route=direct&to=491701234567").
         to_return(:status => 200, :body => "", :headers => {})
 
     sms.deliver
 
-    assert_requested(:get, "http://gateway.smstrade.de/?key=KEY&to=491701234567&message=#{URI.encode(sms.text)}&route=direct&from=SENDER&charset=UTF-8")
+    assert_requested(:get, "http://gateway.smspromote.de/?key=KEY&to=491701234567&message=#{URI.encode(sms.text)}&route=direct&from=SENDER&charset=UTF-8")
   end
 
   it 'allows changing the route on the fly' do
 
     sms = SmsGateway::Sms.new(:to => '491701234567', :text => "SMSTEXT", :from => 'SENDER', :route => 'basic')
 
-    stub_request(:get, "http://gateway.smstrade.de/?charset=UTF-8&from=SENDER&key=KEY&message=#{URI.encode(sms.text)}&route=basic&to=491701234567").
+    stub_request(:get, "http://gateway.smspromote.de/?charset=UTF-8&from=SENDER&key=KEY&message=#{URI.encode(sms.text)}&route=basic&to=491701234567").
         to_return(:status => 200, :body => "", :headers => {})
 
     sms.deliver
 
-    assert_requested(:get, "http://gateway.smstrade.de/?key=KEY&to=491701234567&message=#{URI.encode(sms.text)}&route=basic&from=SENDER&charset=UTF-8")
+    assert_requested(:get, "http://gateway.smspromote.de/?key=KEY&to=491701234567&message=#{URI.encode(sms.text)}&route=basic&from=SENDER&charset=UTF-8")
 
   end
 

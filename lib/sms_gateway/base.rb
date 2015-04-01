@@ -3,7 +3,7 @@ module SmsGateway
   class Base
 
     class << self
-      attr_accessor :from, :user, :password, :key, :route
+      attr_accessor :from, :user, :password, :key, :route, :base_uri
       attr_reader :adapter
 
       def configure
