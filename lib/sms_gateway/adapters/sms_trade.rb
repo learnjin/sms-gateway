@@ -10,6 +10,7 @@ module SmsGateway
       def initialize(config={})
         @config = {:key => SmsGateway::Base.key, :from => SmsGateway::Base.from, :route => SmsGateway::Base.route}
         @config.merge!(config)
+        self.class.base_uri SmsGateway::Base.base_uri
       end
 
       def send_sms(sms)
