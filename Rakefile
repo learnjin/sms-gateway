@@ -4,7 +4,7 @@ require 'rdoc/task'
 
 Bundler::GemHelper.install_tasks
 
-task :default => :test
+task default: :test
 
 desc 'Run unit tests'
 Rake::TestTask.new(:test) do |test|
@@ -21,6 +21,3 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-
-
-

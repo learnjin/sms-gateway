@@ -1,12 +1,12 @@
 ## The SMS-Object
 module SmsGateway
-  class Sms < Struct.new(:from, :to, :text, :route)
-
+  class Sms < Struct.new(:from, :to, :text, :route, :delivery_report)
     def initialize(params)
-      self.from = params[:from]||SmsGateway::Base.from
+      self.from = params[:from] || SmsGateway::Base.from
       self.to = params[:to]
       self.text = params[:text]
       self.route = params[:route]
+      self.delivery_report = params[:delivery_report]
     end
 
     def deliver
@@ -14,11 +14,7 @@ module SmsGateway
     end
 
     def to_s
-      "SMS: from:#{self.from}, to:#{self.to}, text:#{self.text}"
+      "SMS: from:#{from}, to:#{to}, text:#{text}"
     end
-
   end
 end
-
-
-

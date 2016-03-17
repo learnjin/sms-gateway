@@ -1,23 +1,23 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "sms_gateway/version"
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+require 'sms_gateway/version'
 
 Gem::Specification.new do |s|
-  s.name        = "sms_gateway"
+  s.name        = 'sms_gateway'
   s.version     = SmsGateway::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Kai Rubarth"]
-  s.email       = ["kai@doxter.de"]
-  s.homepage    = ""
-  s.summary     = %q{Simple and flexible interface to SMS Gateways}
-  s.description = %q{Provides an interface to SMS Gateways. So far it supports smsglobal.com and smstrade.de}
+  s.authors     = ['Kai Rubarth']
+  s.email       = ['kai@doxter.de']
+  s.homepage    = ''
+  s.summary     = 'Simple and flexible interface to SMS Gateways'
+  s.description = 'Provides an interface to SMS Gateways. So far it supports smsglobal.com and smstrade.de'
 
-  s.rubyforge_project = "sms_gateway"
+  s.rubyforge_project = 'sms_gateway'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  s.require_paths = ['lib']
 
   s.add_dependency('httparty')
 
@@ -25,7 +25,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency('minitest')
   s.add_development_dependency('pry')
   s.add_development_dependency('webmock')
-
 end
-
-

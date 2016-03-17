@@ -5,3 +5,4 @@ require 'minitest/autorun'
 require 'webmock/minitest'
 require 'pry'
 
+include WebMock::API

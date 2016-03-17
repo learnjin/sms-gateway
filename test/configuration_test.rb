@@ -1,13 +1,12 @@
 require 'test_helper'
 
 describe SmsGateway::Base do
-
   before do
-     SmsGateway::Base.configure do |config|
+    SmsGateway::Base.configure do |config|
       config.from = '123456789'
       config.user = 'some_user'
       config.password = 'secret'
-      config.adapter = 'test' 
+      config.adapter = 'test'
     end
   end
 
@@ -20,13 +19,7 @@ describe SmsGateway::Base do
   end
 
   def test_parse_from
-    sms = SmsGateway::Sms.new(:text => 'test')
+    sms = SmsGateway::Sms.new(text: 'test')
     assert_equal '123456789', sms.from
   end
-
 end
-
-
-
-
-
