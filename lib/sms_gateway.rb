@@ -7,6 +7,3 @@ require 'sms_gateway/jobs/sms_job'
 
 module SmsGateway
 end
-
-
-
